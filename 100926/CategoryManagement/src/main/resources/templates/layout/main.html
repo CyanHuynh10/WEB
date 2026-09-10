@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Quản Lý Danh Mục</title>
+    
+    <!-- Link tới file CSS Pastel vừa tạo -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <!-- 1. HEADER (Có vị trí ảnh sinh viên) -->
+	<header class="app-header">
+		<div class="profile-image">
+	    	<img th:src="@{/images/logo.ico}" alt="Logo" 
+	                 onerror="this.src='https://via.placeholder.com/80x80/bde0fe/4a4a4a?text=Logo'"/>
+		</div>
+		<div>
+	    	<h1>Cyan Huynh - Spring Boot Category Project</h1>
+		</div>
+	</header>
+
+    <!-- 2. CONTENT (Vùng hiển thị nội dung động) -->
+    <!-- Các trang list.html và form.html sẽ được tự động nhúng vào đây nhờ thẻ layout:fragment -->
+    <main class="app-content" layout:fragment="content">
+        <!-- Nội dung sẽ được ghi đè -->
+    </main>
+
+    <!-- 3. FOOTER (Thông tin sinh viên) -->
+    <footer class="app-footer">
+        <div class="student-info">
+            <p><strong>Họ và tên:</strong> Phạm Nguyễn Huỳnh Trường</p>
+            <p><strong>MSSV:</strong> 24110064</p>
+            <p><strong>Lớp:</strong> 09_ST3_ST5_A3-204</p>
+            <p><strong>Môn học:</strong> Lập trình Web</p>
+        </div>
+    </footer>
+
+</body>
+</html>

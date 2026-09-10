@@ -1,0 +1,123 @@
+/* BẢNG MÀU PASTEL & TYPOGRAPHY */
+:root {
+    --bg-page: #f8f9fa;
+    --card-bg: #ffffff;
+    --primary-pastel: #a2d2ff;     /* Xanh dương nhạt */
+    --secondary-pastel: #bde0fe;   /* Xanh biển siêu nhạt */
+    --accent-pastel: #ffafcc;      /* Hồng nhạt (dùng cho nút Xóa/Hủy) */
+    --success-pastel: #b7e4c7;     /* Xanh lá nhạt (Thông báo thành công) */
+    --text-main: #4a4a4a;
+    --text-muted: #888888;
+    --border-color: #e9ecef;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* LAYOUT: HEADER - CONTENT - FOOTER */
+.app-header {
+    background-color: var(--primary-pastel);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.profile-image img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--card-bg);
+    margin-right: 1.5rem;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.app-content {
+    flex: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    box-sizing: border-box;
+}
+
+.app-footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.student-info p {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+/* COMPONENT: TABLE, BUTTONS, FORMS */
+.page-title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--secondary-pastel);
+    padding-bottom: 0.5rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.btn-primary { background-color: var(--primary-pastel); color: #222; }
+.btn-primary:hover { filter: brightness(0.95); }
+.btn-danger { background-color: var(--accent-pastel); color: #222; }
+.btn-danger:hover { filter: brightness(0.95); }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--secondary-pastel);
+    color: #333;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+/* THÔNG BÁO (ALERTS) */
+.alert { padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-size: 0.95rem;}
+.alert-success { background-color: var(--success-pastel); color: #1b4332; }
+.alert-danger { background-color: var(--accent-pastel); color: #590d22; }

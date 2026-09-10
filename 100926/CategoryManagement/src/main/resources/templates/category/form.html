@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <title th:text="${pageTitle}">Category Form</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        
+        <!-- Tiêu đề động: Add hoặc Edit -->
+        <h2 class="page-title" th:text="${pageTitle}">Category Form</h2>
+
+        <!-- Form Binding với đối tượng Category -->
+        <form th:action="@{/categories/save}" method="post" th:object="${category}" style="max-width: 500px;">
+            
+            <!-- Trường ẩn lưu ID (Quan trọng để Spring phân biệt Thêm hay Sửa) -->
+            <input type="hidden" th:field="*{categoryId}" />
+
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Category Name <span style="color: red;">*</span></label>
+                <!-- Input tự động điền dữ liệu của name -->
+                <input type="text" th:field="*{name}" required
+                       style="width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 6px; box-sizing: border-box;"
+                       placeholder="Enter category name..."/>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary" style="min-width: 100px;">Save</button>
+                <a th:href="@{/categories}" class="btn btn-danger" style="min-width: 100px; text-align: center;">Cancel</a>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
