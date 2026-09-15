@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title th:text="${formTitle}">Product</title>
+</head>
+<body>
+    <section layout:fragment="content">
+        <!-- TITLE -->
+        <h2 th:text="${formTitle}" class="mb-4">Product</h2>
+
+        <!-- SUCCESS MESSAGE -->
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+        <!-- ERROR MESSAGE -->
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+        <!-- PRODUCT FORM -->
+        <form method="post" enctype="multipart/form-data"
+              th:object="${product}"
+              th:action="${product.id == null} ? @{/products/create} : @{/products/edit/{id}(id=${product.id})}">
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label class="form-label"> Tên sản phẩm </label>
+                <input type="text" class="form-control" th:field="*{name}">
+                <div class="text-danger" th:errors="*{name}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> Giá </label>
+                <input type="number" step="0.01" class="form-control" th:field="*{price}">
+                <div class="text-danger" th:errors="*{price}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> Số lượng </label>
+                <input type="number" class="form-control" th:field="*{quantity}">
+                <div class="text-danger" th:errors="*{quantity}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> Mô tả </label>
+                <textarea class="form-control" rows="4" th:field="*{description}"></textarea>
+            </div>
+
+            <!-- CURRENT IMAGES (Hiển thị các ảnh đang có) -->
+            <div class="mb-4" th:if="${product.images != null and !product.images.isEmpty()}">
+                <label class="form-label fw-bold"> Hình ảnh hiện tại </label>
+                <div class="d-flex gap-3 flex-wrap">
+                    <div th:each="image : ${product.images}" class="card" style="width: 150px;">
+                        <img th:src="@{'/uploads/products/' + ${image.imageUrl}}"
+                             th:alt="${product.name}" class="card-img-top"
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body text-center p-2">
+                            <div th:if="${image.primary}" class="mb-2">
+                                <span class="badge bg-success">Ảnh chính</span>
+                            </div>
+                            <!-- Nút Xóa ảnh sử dụng AJAX -->
+                            <button type="button" class="btn btn-danger btn-sm w-100"
+                                    th:data-url="@{'/products/image/delete/' + ${image.id}}"
+                                    onclick="deleteImage(this)">Xóa ảnh</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UPLOAD (Thêm ảnh mới, cho phép chọn nhiều ảnh với 'multiple') -->
+            <div class="mb-3">
+                <label class="form-label fw-bold"> Thêm hình ảnh mới </label>
+                <input type="file" class="form-control" name="imageFiles" accept="image/*" multiple>
+                <div class="form-text">Có thể chọn nhiều hình ảnh.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a th:href="@{/products}" class="btn btn-secondary">Quay lại</a>
+        </form>
+
+        <!-- SCRIPT XỬ LÝ NÚT XÓA ẢNH BẰNG AJAX -->
+        <script>
+            function deleteImage(button) {
+                if (!confirm("Bạn có chắc muốn xóa hình ảnh này?")) {
+                    return;
+                }
+                const url = button.getAttribute("data-url");
+                
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload(); // Tải lại trang khi xóa thành công
+                    } else {
+                        alert("Không thể xóa hình ảnh!");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Có lỗi xảy ra khi xóa hình ảnh!");
+                });
+            }
+        </script>
+    </section>
+</body>
+</html>
