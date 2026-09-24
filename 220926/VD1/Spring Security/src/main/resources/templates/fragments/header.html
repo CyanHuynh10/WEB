@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header th:fragment="header">
+    <nav style="display:flex; justify-content:space-between; align-items:center; background:#4CAF50; color:white; padding:15px 30px;">
+        <a th:href="@{/}" style="color:white; text-decoration:none; font-size: 24px; font-weight: bold;">IOTSTAR SHOP</a>
+        <div th:if="${#authorization.expression('isAuthenticated()')}" style="display:flex; align-items:center; gap: 15px;">
+            <span th:text="${#authentication.principal.fullName}" style="font-weight: bold;"></span>
+            <span th:text="'(' + ${#authentication.principal.username} + ')'"></span>
+            <span th:text="${#authentication.principal.email}"></span>
+            <span th:text="${#authentication.principal.role}" style="background: white; color: #4CAF50; padding: 3px 8px; border-radius: 5px;"></span>
+            <form th:action="@{/logout}" method="post" style="display:inline; margin: 0;">
+                <button type="submit" style="background: #f44336; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Đăng xuất</button>
+            </form>
+        </div>
+        <div th:unless="${#authorization.expression('isAuthenticated()')}">
+            <a th:href="@{/login}" style="color: white; text-decoration: none; border: 1px solid white; padding: 8px 15px; border-radius: 5px;">Đăng nhập</a>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

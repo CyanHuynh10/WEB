@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
+<head>
+    <title>Trang chủ</title>
+</head>
+<body>
+<main layout:fragment="content" style="text-align: center; margin-top: 50px;">
+    <h1 style="color: #333;">Trang chủ UTEShop</h1>
+    <div th:if="${#authorization.expression('isAuthenticated()')}" style="font-size: 18px; color: #555; margin-top: 20px;">
+        Xin chào <strong th:text="${#authentication.principal.fullName}" style="color: #4CAF50;">User</strong>!
+    </div>
+    <div th:unless="${#authorization.expression('isAuthenticated()')}" style="font-size: 18px; color: #555; margin-top: 20px;">
+        Vui lòng đăng nhập để xem thông tin của bạn.
+    </div>
+</main>
+</body>
+</html>
