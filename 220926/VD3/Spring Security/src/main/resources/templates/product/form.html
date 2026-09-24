@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm Sản phẩm</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+    <div th:replace="~{fragments/header :: header}"></div>
+    <main>
+        <div style="max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Thêm Sản phẩm Mới</h2>
+            
+            <form th:action="@{/products/save}" method="post" enctype="multipart/form-data">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Tên sản phẩm</label>
+                    <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Mô tả</label>
+                    <textarea name="description" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Giá (VNĐ)</label>
+                    <input type="number" name="price" required min="0" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Hình ảnh (Cloudinary)</label>
+                    <input type="file" name="image" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background: #f9f9f9;">
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" style="flex: 1; background: #4CAF50; color: white; border: none; padding: 12px; border-radius: 4px; font-size: 16px; cursor: pointer;">Lưu Sản phẩm</button>
+                    <a th:href="@{/products}" style="flex: 1; background: #f44336; color: white; text-align: center; text-decoration: none; padding: 12px; border-radius: 4px; font-size: 16px; display: block; box-sizing: border-box;">Hủy</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

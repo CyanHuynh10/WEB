@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đăng nhập</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main>
+        <div style="max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Đăng nhập</h2>
+            
+            <div th:if="${param.error}" style="background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                Username/email hoặc password không đúng, hoặc tài khoản chưa kích hoạt.
+            </div>
+            <div th:if="${param.logout}" style="background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                Bạn đã đăng xuất.
+            </div>
+            <div th:if="${param.registered}" style="background: #e3f2fd; color: #1565c0; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                Kích hoạt thành công! Hãy đăng nhập.
+            </div>
+            <div th:if="${param.reset}" style="background: #e3f2fd; color: #1565c0; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                Đặt lại mật khẩu thành công!
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Username / Email</label>
+                    <input type="text" name="username" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Mật khẩu</label>
+                    <input type="password" name="password" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 15px; display: flex; align-items: center;">
+                    <input type="checkbox" name="remember-me" id="remember-me" style="margin-right: 8px;">
+                    <label for="remember-me" style="color: #555; cursor: pointer;">Ghi nhớ đăng nhập</label>
+                </div>
+                
+                <button type="submit" style="width: 100%; background: #4CAF50; color: white; border: none; padding: 12px; border-radius: 4px; font-size: 16px; cursor: pointer;">
+                    Đăng nhập
+                </button>
+            </form>
+            <div style="margin-top: 15px; text-align: center; display: flex; justify-content: space-between;">
+                <a th:href="@{/forgot-password}" style="color: #FF9800; text-decoration: none;">Quên mật khẩu?</a>
+                <a th:href="@{/register}" style="color: #4CAF50; text-decoration: none;">Chưa có tài khoản?</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
