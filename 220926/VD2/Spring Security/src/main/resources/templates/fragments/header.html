@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header th:fragment="header">
+    <nav style="display:flex; justify-content:space-between; align-items:center; background:#4CAF50; color:white; padding:15px 30px;">
+        <a th:href="@{/}" style="color:white; text-decoration:none; font-size: 24px; font-weight: bold;">HỆ THỐNG QUẢN LÝ (PHASE 2)</a>
+        
+        <div th:if="${#authorization.expression('isAuthenticated()')}" style="display:flex; align-items:center; gap: 15px;">
+            <img th:if="${#authentication.principal.images != null}" th:src="${#authentication.principal.images}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+            <img th:unless="${#authentication.principal.images != null}" src="https://ui-avatars.com/api/?name=User&background=random" alt="Default Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+            
+            <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                <span th:text="${#authentication.principal.fullName}" style="font-weight: bold; font-size: 16px;"></span>
+                <span style="font-size: 12px; opacity: 0.8;" th:text="'(' + ${#authentication.principal.username} + ') - ' + ${#authentication.principal.role}"></span>
+            </div>
+            
+            <form th:action="@{/logout}" method="post" style="display:inline; margin: 0; margin-left: 10px;">
+                <button type="submit" style="background: #f44336; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Đăng xuất</button>
+            </form>
+        </div>
+        
+        <div th:unless="${#authorization.expression('isAuthenticated()')}">
+            <a th:href="@{/login}" style="color: white; text-decoration: none; border: 1px solid white; padding: 8px 15px; border-radius: 5px;">Đăng nhập</a>
+        </div>
+    </nav>
+</header>
+</body>
+</html>
