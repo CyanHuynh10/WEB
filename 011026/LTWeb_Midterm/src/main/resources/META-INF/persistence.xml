@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <persistence-unit name="LTWeb_MidtermPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Entity classes -->
+        <class>vn.iot.ltweb_midterm.entity.Book_24110064</class>
+        <class>vn.iot.ltweb_midterm.entity.User_24110064</class>
+        <class>vn.iot.ltweb_midterm.entity.Author_24110064</class>
+        <class>vn.iot.ltweb_midterm.entity.Rating_24110064</class>
+        <class>vn.iot.ltweb_midterm.entity.Order_24110064</class>
+        <class>vn.iot.ltweb_midterm.entity.OrderItem_24110064</class>
+
+        <properties>
+            <!-- These will be overridden by application.properties -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+        </properties>
+    </persistence-unit>
+</persistence>
